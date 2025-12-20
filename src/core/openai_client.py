@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Optional
 import openai
 
 
-def _load_api_key(path: str = "ignore/lp_openai_key_secret.txt") -> str:
+def _load_api_key(path: str = "ignore/openai_key_secret.txt") -> str:
     """Read the secret key from a local text file (first line, trimmed)."""
     return Path(path).read_text(encoding="utf-8").strip()
 
