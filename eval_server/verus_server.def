@@ -1,0 +1,43 @@
+Bootstrap: docker
+From: rust:1.85
+
+%post
+    # Install Python and pip (Rust container may not have them)
+    apt-get update && apt-get install -y \
+        python3 \
+        python3-pip \
+        && rm -rf /var/lib/apt/lists/*
+
+    # Install Python packages for Flask server (use --break-system-packages for Debian 12)
+    pip3 install --no-cache-dir --break-system-packages flask flask-cors requests tqdm
+
+    # Verify environment
+    python3 --version
+    rustc --version
+
+%environment
+    export LC_ALL=C
+    export PATH=/verus:$PATH
+    export VERUS_ROOT=/verus
+
+%runscript
+    # Default: run the server
+    exec python3 /server/server.py
+
+%startscript
+    # For instance start
+    exec python3 /server/server.py
+
+%labels
+    Version v1.0
+    Description Verus evaluation server with GLIBC 2.34+
+
+%help
+    This container provides a Verus evaluation server.
+
+    Usage:
+        # Run the server
+        singularity run verus_server.sif
+
+        # Or with explicit binding
+        singularity run --bind /path/to/eval_server:/server verus_server.sif

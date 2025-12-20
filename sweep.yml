@@ -1,0 +1,343 @@
+program: train.py
+method: grid
+project: av0
+entity: socialiq
+parameters:
+  # Run-specific configurations
+  config:
+    values:
+      ## Main experiments
+      # - name: REST-EM
+      #   tags: main
+      #   proposal_strategy: rft_humandata
+      # - name: AV0
+      #   tags: main
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AlphaVerus
+      #   tags: main
+      #   proposal_strategy: none_humandata
+      #   inf_fs: 50
+      #   n_iterations: 1
+
+      # ## Ablations
+      # - name: AV0-specver
+      #   tags: main,verif_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_-specver_humandata
+      # - name: AV0-solutionver
+      #   tags: main,verif_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_-solutionver_humandata
+      # - name: AV0-ver
+      #   tags: main,verif_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_-specver-solutionver_humandata
+      # - name: AV0-iter
+      #   tags: main,budget_analysis
+      #   n_iterations: 2
+      #   max_n_qs: 40000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-diff
+      #   tags: main,diff_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_nodiff_humandata
+      - name: AV0-sampling2
+        tags: main,sampling_analysis
+        max_n_qs: 10000
+        proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_nosampling_humandata
+        
+      # ## TTT experiments
+      # - name: REST-EM-humaneval
+      #   tags: seed_results
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   proposal_strategy: rft_humandata
+      # - name: AV0-humaneval
+      #   tags: seed_results
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: REST-EM-mbpp
+      #   tags: seed_results
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   proposal_strategy: rft_humandata
+      # - name: AV0-mbpp
+      #   tags: seed_results
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      # ## Scaling experiments
+      # - name: AV0-1000
+      #   tags: scaling
+      #   max_n_qs: 1000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-2000
+      #   tags: scaling
+      #   max_n_qs: 2000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-4000
+      #   tags: scaling
+      #   max_n_qs: 4000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-8000
+      #   tags: scaling
+      #   max_n_qs: 8000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-16000
+      #   tags: scaling
+      #   max_n_qs: 16000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-32000
+      #   tags: scaling
+      #   max_n_qs: 32000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      ## Scaling experiments (test time training for mbpp)
+      # - name: AV0-1000-mbpp
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   tags: scaling-mbpp
+      #   max_n_qs: 1000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-2000-mbpp
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   tags: scaling-mbpp
+      #   max_n_qs: 2000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-4000-mbpp
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   tags: scaling-mbpp
+      #   max_n_qs: 4000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-8000-mbpp
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   tags: scaling-mbpp
+      #   max_n_qs: 8000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-16000-mbpp
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   tags: scaling-mbpp
+      #   max_n_qs: 16000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-32000-mbpp
+      #   train_dataset: mbpp
+      #   test_datasets: dafny2verus,humaneval
+      #   tags: scaling-mbpp
+      #   max_n_qs: 32000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      # ## Scaling experiments (test time training for humaneval)
+      # - name: AV0-1000-humaneval
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   tags: scaling-humaneval
+      #   max_n_qs: 1000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-2000-humaneval
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   tags: scaling-humaneval
+      #   max_n_qs: 2000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-4000-humaneval
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   tags: scaling-humaneval
+      #   max_n_qs: 4000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-8000-humaneval
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   tags: scaling-humaneval
+      #   max_n_qs: 8000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-16000-humaneval
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   tags: scaling-humaneval
+      #   max_n_qs: 16000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0-32000-humaneval
+      #   train_dataset: humaneval
+      #   test_datasets: dafny2verus,mbpp
+      #   tags: scaling-humaneval
+      #   max_n_qs: 32000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      # ## Budget experiments
+      # Budget fixing: 1k
+      # - name: AV0_5i_b1k
+      #   tags: budget_analysis,budget1k
+      #   inf_k: 5
+      #   n_iterations: 6
+      #   max_n_qs: 200
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_4i_b1k
+      #   tags: budget_analysis,budget1k
+      #   inf_k: 5
+      #   n_iterations: 5
+      #   max_n_qs: 250
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_3i_b1k
+      #   tags: budget_analysis,budget1k
+      #   inf_k: 5
+      #   n_iterations: 4
+      #   max_n_qs: 333
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_2i_b1k
+      #   tags: budget_analysis,budget1k
+      #   inf_k: 5
+      #   n_iterations: 3
+      #   max_n_qs: 500
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_1i_b1k
+      #   tags: budget_analysis,budget1k
+      #   inf_k: 5
+      #   n_iterations: 2
+      #   max_n_qs: 1000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      # # Budget fixing: 2k
+      # - name: AV0_5i_b2k
+      #   tags: budget_analysis,budget2k
+      #   inf_k: 5
+      #   n_iterations: 6
+      #   max_n_qs: 400
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_4i_b2k
+      #   tags: budget_analysis,budget2k
+      #   inf_k: 5
+      #   n_iterations: 5
+      #   max_n_qs: 500
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_3i_b2k
+      #   tags: budget_analysis,budget2k
+      #   inf_k: 5
+      #   n_iterations: 4
+      #   max_n_qs: 666
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_2i_b2k
+      #   tags: budget_analysis,budget2k
+      #   inf_k: 5
+      #   n_iterations: 3
+      #   max_n_qs: 1000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_1i_b2k
+      #   tags: budget_analysis,budget2k
+      #   inf_k: 5
+      #   n_iterations: 2
+      #   max_n_qs: 2000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      # # Budget fixing: 4k
+      # - name: AV0_5i_b4k
+      #   tags: budget_analysis,budget4k
+      #   inf_k: 5
+      #   n_iterations: 6
+      #   max_n_qs: 800
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_4i_b4k
+      #   tags: budget_analysis,budget4k
+      #   inf_k: 5
+      #   n_iterations: 5
+      #   max_n_qs: 1000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_3i_b4k
+      #   tags: budget_analysis,budget4k
+      #   inf_k: 5
+      #   n_iterations: 4
+      #   max_n_qs: 1333
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_2i_b4k
+      #   tags: budget_analysis,budget4k
+      #   inf_k: 5
+      #   n_iterations: 3
+      #   max_n_qs: 2000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_1i_b4k
+      #   tags: budget_analysis,budget4k
+      #   inf_k: 5
+      #   n_iterations: 2
+      #   max_n_qs: 4000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+      # # IO Analyses
+      # - name: AV0_a2u
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_uniform_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_a2e
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_easy_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_ai2e
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_easy_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_e2h
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_easy_output_hard_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_h2h
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_hard_output_hard_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_ai2ui
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_a2h_thresh1
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_hard_fsk_12_easythresh_0.8_medthresh_0.3_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_a2h_thresh2
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_hard_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_a2h_thresh3
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_hard_fsk_12_easythresh_0.8_medthresh_0.1_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_ai2ui_thresh2 # MAIN METHOD
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+      # - name: AV0_ai2ui_thresh2_filtered
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_ui_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_filtertrainsols_humandata
+      # - name: AV0_a2h_thresh2_filtered
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_all_output_hard_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_filtertrainsols_humandata
+      # - name: AV0_ai2h_thresh2_filtered
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_hard_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_filtertrainsols_humandata
+      # - name: AV0_ai2h # this is the same as SIMPLe_ai2h
+      #   tags: io_analysis
+      #   max_n_qs: 10000
+      #   proposal_strategy: icl_input_ai_output_hard_fsk_12_easythresh_0.8_medthresh_0.2_hardthresh_0.001_ablation_none_humandata
+
+
+  # Common parameters across all runs
+  seed:
+    values: [0, 1, 2, 3, 4]
+    # values: [0]
+  inf_n_gpus:
+    value: 1
+  inf_k:
+    value: 10
+  n_iterations:
+    value: 5
+  run_dir_base:
+    value: ./outputs

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+
+# Experiments & Outputs
+outputs/
+logs/
+wandb/
+cache/
+*.pk
+*.sif
+
+# Generated files
+*.tex
+*.png
+*.rs
+
+# Temporary
+temp*/
+tmp*/
+
+# Secrets
+*secret*
+ignore/
+.env
+
+# Build artifacts
+*.long-type*
+dcgm*
+
+# Testing
+.pytest_cache/
+test_*.out
+test_*.err
+test_*.log
+
+# Eval server scratch
+eval_server/scratch/
