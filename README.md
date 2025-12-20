@@ -39,9 +39,16 @@ sbatch train.sbatch
 - `eval_server/` - Verus verification server
 - `data/` - Dataset files (dafny2verus, humaneval, mbpp)
 
+## Pre-trained Models
+
+We provide trained LoRA weights from our main experiments in `model_runs/`:
+- `AV0-seed0` through `AV0-seed4` - Five seeds of our main PSV training runs
+
+Each contains `models/iter5/` with the final LoRA adapter (compatible with Qwen/Qwen2.5-Coder-7B-Instruct).
+
 ## Reproducing Paper Results
 
-If you uncomment everything in `sweep.yml` and run it with the commands above, you will reproduce all the results for the apper.
+If you uncomment everything in `sweep.yml` and run it with the commands above, you will reproduce all the results for the paper.
 
 Analysis scripts in `analysis/` reproduce paper figures:
 - `ttt/` - Test-time training results
